@@ -13,8 +13,8 @@ B = [20 2.8;
     0 0;
     0 0];        % Example matrix B (input matrix)
 
-% C = [0 1; %checking function
-%     -2 -3];
+C = [0 0 1 0; %checking function
+    0 0 0 1];
 
 % Find the poles of the system (the eigenvalues of A)
 [M, EVal] = eig(A);
@@ -69,7 +69,7 @@ end
 % eigVals = [-3 -4];
 
 EigenList = transpose(diag(EVal)); 
-NewPoleList = [-0.5 -15 -8+3i -5-3i]; %these are the poles that I moved 
+NewPoleList = [-1 -11 -8+3i -8-3i]; %these are the poles that I moved 
 % disp(EigenList)
 % [-1 -11 -8+3i -8-3i]; good for phi, p, and almost r when IC = pi/4
 % [-0.5 -17 -8+3i -5-3i] good for beta state
@@ -87,6 +87,21 @@ check_eig = transpose(diag(EVal2));
 fprintf("Checking to ensure that pole calculations are correct:\n")
 for i=1:length(check_eig)
     fprintf('lambda(%d) = %.2f + %.2fi\n', i, real(check_eig(i)), imag(check_eig(i)))
+end
+
+Poles_Ob = [-12 -13 -14 -15];
+
+[K0_T] = solveKMatrix(transpose(A), transpose(C), Poles_Ob); %result is the transpose K0
+
+K0 = K0_T';
+
+%Checking to see if K calculation was correct
+Ao = transpose(A) - transpose(C)*(K0_T);
+[Mo, EValo] = eig(Ao);
+check_eig_ob = transpose(diag(EValo));
+fprintf("Checking to ensure that observer pole calculations are correct:\n")
+for i=1:length(check_eig_ob)
+    fprintf('lambda(%d) = %.2f + %.2fi\n', i, real(check_eig_ob(i)), imag(check_eig_ob(i)))
 end
 
 

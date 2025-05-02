@@ -15,7 +15,7 @@ function [K] = solveKMatrix(A, B, eigenvalues)
         lambda = eigenvalues(i);  % Eigenvalue
         % Form the matrix [lambda*I - A | B]
         matrix = [lambda*I - A, B];
-        disp(matrix);
+        % disp(matrix);
 
         % Solve Xz = 0 for z, using the left null space (which is equivalent to solving the homogeneous system)
         % Using the pseudoinverse to get the solution to the underdetermined system
@@ -29,12 +29,16 @@ function [K] = solveKMatrix(A, B, eigenvalues)
             end
         end
         fprintf('p=%.4f\n', p);
+
         Z = [Z, z(:,p)];
+        % Z = [Z, z(:,1)];
 
         
         % Display results
         fprintf('For eigenvalue %.4f + %.4fi, the solution z is:\n', real(lambda), imag(lambda));
+
         disp(z(:,p));
+        % disp(z(:,1));
     end
     disp(Z)
     G = Z(1:row_len, 1:row_len);
