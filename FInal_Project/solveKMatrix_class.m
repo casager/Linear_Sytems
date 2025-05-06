@@ -1,7 +1,7 @@
 function [K] = solveKMatrix_class(A, B, eigenvalues, v)
-    % A: 4x4 matrix
-    % B: 4x2 matrix
-    % eigenvalues: vector of 4 eigenvalues from matrix A
+    % A: 3x3 matrix
+    % B: 3x1 matrix
+    % eigenvalues: vector of 3 eigenvalues from matrix A
     fprintf('------------------------\n')
     fprintf('SOLVING FOR THE K MATRIX\n')
     numRowsA = size(A,1);
@@ -25,7 +25,6 @@ function [K] = solveKMatrix_class(A, B, eigenvalues, v)
 
         % phi=inv(mat);
         % phiBv = phi*B*v;
-        
         phiBv = (mat\B)*v; %equivalent of previous 2 lines
         
         % fprintf('phi[%d]*B*v=%.4f\n', i, phiBv);
@@ -34,7 +33,7 @@ function [K] = solveKMatrix_class(A, B, eigenvalues, v)
         Z = [Z, phiBv];
 
     end
-    disp(Z);
+    % disp(Z);
     % disp(V);
     % K=-V*inv(Z);
     K=-V/Z; %equivalent of previous line
