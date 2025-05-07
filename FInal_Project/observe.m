@@ -22,7 +22,7 @@ else
     disp('The system is not controllable');
 end
 
-Poles_Ob = [-3 -4+0.0728i -4+-0.0728i]; %way too much for the class place
+Poles_Ob = [-6 -7+0.0728i -7+-0.0728i]; %way too much for the class place
 % - the graph starts to explode
 % Poles_Ob = [-0.2 -0.3+0.0728i -0.3+-0.0728i];
 % Poles_Ob = [-5 -6 -7]; %if we do not have any freq compoent, get high
@@ -32,6 +32,11 @@ Poles_Ob = [-3 -4+0.0728i -4+-0.0728i]; %way too much for the class place
 % signals are real anyway but need 0.000i term removed
 v = [10 0.25]'; %adjust this until reasonable control values. 
 % when this is [1 1] with very high gain, we go out of control
+% gains are going to be large since -Kx output is voltage, and the x values
+% are going to be fairly small (control distance specifically). as long as
+% u is in an optimal range of voltage then we should be fine
+fprintf('------------------------\n')
+fprintf('SOLVING FOR THE K_ob MATRIX\n')
 [K0_T] = real(solveKMatrix_class(A', C', Poles_Ob, v)); %result is the transpose K0
 K0 = K0_T';
 disp('class method K0:');

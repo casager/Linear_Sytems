@@ -36,6 +36,8 @@ x_ref=[0.01, 0, 0.002];
 
 % Class method for K matrix
 % signals are real anyway but need 0.000i term removed
+fprintf('------------------------\n')
+fprintf('SOLVING FOR THE K MATRIX\n')
 v = 1;
 [K] = real(solveKMatrix_class(A,B,NewPoleList, v));
 disp('class method K:');

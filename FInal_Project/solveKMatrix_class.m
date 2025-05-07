@@ -2,8 +2,8 @@ function [K] = solveKMatrix_class(A, B, eigenvalues, v)
     % A: 3x3 matrix
     % B: 3x1 matrix
     % eigenvalues: vector of 3 eigenvalues from matrix A
-    fprintf('------------------------\n')
-    fprintf('SOLVING FOR THE K MATRIX\n')
+    % fprintf('------------------------\n')
+    % fprintf('SOLVING FOR THE K MATRIX\n')
     numRowsA = size(A,1);
     
     % disp(row_len)
